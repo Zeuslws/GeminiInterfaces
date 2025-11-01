@@ -1,4 +1,4 @@
-package edu.gemini;
+package edu.gemini.model;
 
 public abstract class AbstractObservingProgramConfigs {
     // Reflective converging beam and Cassegrain focus

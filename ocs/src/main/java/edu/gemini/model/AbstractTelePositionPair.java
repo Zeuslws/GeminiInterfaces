@@ -1,4 +1,4 @@
-package edu.gemini;
+package edu.gemini.model;
 
 public class AbstractTelePositionPair {
     private double direction;

@@ -1,11 +1,14 @@
 package edu.gemini;
 
+import edu.gemini.model.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingProgramConfigs, AstronomicalData> {
+public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingProgramConfigs,
+        AstronomicalData, Astronomer, ScienceObserver> {
 
     @Override
     public ArrayList<SciencePlan> getAllSciencePlans() {
@@ -18,12 +21,12 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
     }
 
     @Override
-    public String createSciencePlan(SciencePlan sciencePlan) {
-        return sciencePlan.getName();
+    public String createSciencePlan(SciencePlan sciencePlan, Astronomer an) {
+        return null;
     }
 
     @Override
-    public String submitSciencePlan(SciencePlan sciencePlan) {
+    public String submitSciencePlan(SciencePlan sciencePlan, Astronomer an) {
         return null;
     }
 
@@ -113,7 +116,12 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
     }
 
     @Override
-    public ObservingProgram createObservingProgram(AbstractSciencePlan sp, String opticsPrimary, double fStop, double opticsSecondaryRMS, double scienceFoldMirrorDegree, AbstractObservingProgramConfigs.FoldMirrorType scienceFoldMirrorType, int moduleContent, AbstractObservingProgramConfigs.CalibrationUnit calibrationUnit, AbstractObservingProgramConfigs.LightType lightType, AbstractTelePositionPair[] telePositionPair) {
+    public ObservingProgram createObservingProgram(AbstractSciencePlan sp, String opticsPrimary, double fStop, double opticsSecondaryRMS, double scienceFoldMirrorDegree, AbstractObservingProgramConfigs.FoldMirrorType scienceFoldMirrorType, int moduleContent, AbstractObservingProgramConfigs.CalibrationUnit calibrationUnit, AbstractObservingProgramConfigs.LightType lightType, AbstractTelePositionPair[] telePositionPair, ScienceObserver so) {
+        return null;
+    }
+
+    @Override
+    public ObservingProgram validateSciencePlan(AbstractSciencePlan sp, ScienceObserver so) {
         return null;
     }
 

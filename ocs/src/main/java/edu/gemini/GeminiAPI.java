@@ -1,5 +1,7 @@
 package edu.gemini;
 
+import edu.gemini.model.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +11,9 @@ public interface GeminiAPI<
         SP extends AbstractSciencePlan,
         OP extends AbstractObservingProgram,
         OPC extends AbstractObservingProgramConfigs,
-        AD extends AbstractAstronomicalData
-        > {
+        AAD extends AbstractAstronomicalData,
+        AA extends AbstractAstronomer,
+        AS extends AbstractScienceObserver> {
     /**
      * Get all the science plans in the Gemini system
      *
@@ -28,16 +31,16 @@ public interface GeminiAPI<
     public SP getSciencePlanByNo(int planNo);
 
 
+
+    public String createSciencePlan(SP sp, AA an);
+
     /**
      * Submit a new science plan into the Gemini system.
      *
      * @param sp the science plan to be submitted
      * @return a string indicating the result of the submission
      */
-    public String createSciencePlan(SP sp);
-
-
-    public String submitSciencePlan(SP sp);
+    public String submitSciencePlan(SP sp, AA an);
 
 
     /**
@@ -101,19 +104,19 @@ public interface GeminiAPI<
      * Get the collected astronomical data of a given science plan
      *
      * @param sp the science plan to get the astronomical data
-     * @return astronomical data ({@link edu.gemini.app.ocs.model.AstronomicalData}), or null if the plan is not complete yet.
+     * @return astronomical data ({@link edu.gemini.model.AstronomicalData}), or null if the plan is not complete yet.
      */
-    AD getAstronomicalData(SP sp) throws IOException;
+    AAD getAstronomicalData(SP sp) throws IOException;
 
 
     /***
      * Remove astronomical data from a given science plan
      * @param sp the science plan to remove the astronomical data
-     * @param index index of the astronomical data ({@link edu.gemini.app.ocs.model.AstronomicalData}) to removve
+     * @param index index of the astronomical data ({@link edu.gemini.model.AstronomicalData}) to removve
      * @return the updated astronomical data
      * @throws IOException
      */
-    AD removeAstronomicalData(SP sp, int index) throws IOException;
+    AAD removeAstronomicalData(SP sp, int index) throws IOException;
 
 
     /**
@@ -268,15 +271,23 @@ public interface GeminiAPI<
      * @return The created observing program
      */
     OP createObservingProgram(AbstractSciencePlan sp, String opticsPrimary,
-                                            double fStop,
-                                            double opticsSecondaryRMS,
-                                            double scienceFoldMirrorDegree,
-                                            OPC.FoldMirrorType scienceFoldMirrorType,
-                                            int moduleContent,
-                                                    OPC.CalibrationUnit calibrationUnit,
-                                                    OPC.LightType lightType,
-                                            AbstractTelePositionPair[] telePositionPair);
+                              double fStop,
+                              double opticsSecondaryRMS,
+                              double scienceFoldMirrorDegree,
+                              OPC.FoldMirrorType scienceFoldMirrorType,
+                              int moduleContent,
+                              OPC.CalibrationUnit calibrationUnit,
+                              OPC.LightType lightType,
+                              AbstractTelePositionPair[] telePositionPair,
+                              AS so);
 
+    /**
+     * Validate the given science plan
+     * @param sp the science plan to validate
+     * @param so the science observer who validates the science plan
+     * @return the validated science plan
+     */
+    OP validateSciencePlan(AbstractSciencePlan sp, AS so);
 
     /**
      * Save the observing program to the edu.gemini.OCS system.
