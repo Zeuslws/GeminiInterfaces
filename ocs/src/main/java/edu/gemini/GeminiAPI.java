@@ -287,7 +287,7 @@ public interface GeminiAPI<
      * @param so the science observer who validates the science plan
      * @return the validated science plan
      */
-    OP validateSciencePlan(AbstractSciencePlan sp, AS so);
+    SP validateSciencePlan(AbstractSciencePlan sp, AS so);
 
     /**
      * Save the observing program to the edu.gemini.OCS system.
