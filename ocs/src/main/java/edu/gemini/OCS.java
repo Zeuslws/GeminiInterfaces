@@ -11,7 +11,6 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
         AstronomicalData, Astronomer, ScienceObserver> {
 
     private ArrayList<SciencePlan> sciencePlans = new ArrayList<>();
-    private ArrayList<ObservingProgram> observingPrograms = new ArrayList<>();
     private int nextPlanId = 1; 
 
     @Override
