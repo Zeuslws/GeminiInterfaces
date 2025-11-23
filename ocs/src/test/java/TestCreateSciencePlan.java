@@ -20,4 +20,5 @@ public class TestCreateSciencePlan {
         assertEquals("Chaiyong", as.getFirstName());
         assertEquals("This is a test science plan.", sp.getName());
     }
+    
 }
