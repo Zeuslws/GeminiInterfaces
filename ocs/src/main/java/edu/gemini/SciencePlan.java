@@ -7,13 +7,7 @@ import edu.gemini.model.StarSystem;
 
 
 public class SciencePlan extends AbstractSciencePlan {
-<<<<<<< HEAD
-        SciencePlan sp = (SciencePlan) spAbs;
-
-    boolean valid = true;
     
-    private String name;
-=======
     private int id;                 
     private String name;           
     private Astronomer creator;     
@@ -235,7 +229,6 @@ public class SciencePlan extends AbstractSciencePlan {
     public void setExposure(Float exposure) {
         this.exposure = exposure;
     }
->>>>>>> 14d7642747755fcc8dd5ee01c8f6ae0cc0e94b51
 
     public String getName() {
         return name;
