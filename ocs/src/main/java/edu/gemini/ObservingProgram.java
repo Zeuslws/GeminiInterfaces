@@ -5,49 +5,105 @@ import edu.gemini.model.AbstractTelePositionPair;
 
 public class ObservingProgram extends AbstractObservingProgram {
 
-    String opticsPrimary;
-    float fStop;
-    float opticsSecondaryRMS;
-    float scienceFoldMirrorDegree;
-    ObservingProgramConfigs.FoldMirrorType scienceFoldMirrorType;
-    int moduleContent;
-    ObservingProgramConfigs.CalibrationUnit calibrationUnit;
-    ObservingProgramConfigs.LightType lightType;
-    AbstractTelePositionPair[] telePositionPair, ScienceObserver;
+    private SciencePlan sciencePlan;
+    private String opticsPrimary;
+    private double fStop;
+    private double opticsSecondaryRMS;
+    private double scienceFoldMirrorDegree;
+    private ObservingProgramConfigs.FoldMirrorType scienceFoldMirrorType;
+    private int moduleContent;
+    private ObservingProgramConfigs.CalibrationUnit calibrationUnit;
+    private ObservingProgramConfigs.LightType lightType;
+    private AbstractTelePositionPair[] telePositionPair;
+    private ScienceObserver observer;
 
+    // --- getters & setters ---
 
-    public ObservingProgram createOP(AbstractObservingProgram spAbs) {
+    public SciencePlan getSciencePlan() {
+        return sciencePlan;
+    }
 
-        SciencePlan sp = (SciencePlan) spAbs;
+    public void setSciencePlan(SciencePlan sciencePlan) {
+        this.sciencePlan = sciencePlan;
+    }
 
-        
-        if ("GNZ".equalsIgnoreCase(opticsPrimary)) {
-            if (fStop < 1.8 || fStop > 8.1) return null;
-        } else if ("GSZ".equalsIgnoreCase(opticsPrimary)) {
-            if (fStop < 2.9 || fStop > 18.0) return null;
-        } else {
-            return null;
-        }
+    public String getOpticsPrimary() {
+        return opticsPrimary;
+    }
 
-        String tel = sp.getTelescope();
-        if ("Chile".equalsIgnoreCase(tel)) {
-            if (opticsSecondaryRMS < 5 || opticsSecondaryRMS > 13) return null;
-        } else {
-            if (opticsSecondaryRMS < 5 || opticsSecondaryRMS > 17) return null;
-        }
+    public void setOpticsPrimary(String opticsPrimary) {
+        this.opticsPrimary = opticsPrimary;
+    }
 
-      
-        if (scienceFoldMirrorDegree < 30 || scienceFoldMirrorDegree > 45) return null;
+    public double getFStop() {
+        return fStop;
+    }
 
-       
-        if (moduleContent < 1 || moduleContent > 4) return null;
+    public void setFStop(double fStop) {
+        this.fStop = fStop;
+    }
 
-       
-        ObservingProgram op = new ObservingProgram();
+    public double getOpticsSecondaryRMS() {
+        return opticsSecondaryRMS;
+    }
 
+    public void setOpticsSecondaryRMS(double opticsSecondaryRMS) {
+        this.opticsSecondaryRMS = opticsSecondaryRMS;
+    }
 
+    public double getScienceFoldMirrorDegree() {
+        return scienceFoldMirrorDegree;
+    }
 
-        observingPrograms.add(op);
-        return op;
+    public void setScienceFoldMirrorDegree(double scienceFoldMirrorDegree) {
+        this.scienceFoldMirrorDegree = scienceFoldMirrorDegree;
+    }
+
+    public ObservingProgramConfigs.FoldMirrorType getScienceFoldMirrorType() {
+        return scienceFoldMirrorType;
+    }
+
+    public void setScienceFoldMirrorType(ObservingProgramConfigs.FoldMirrorType scienceFoldMirrorType) {
+        this.scienceFoldMirrorType = scienceFoldMirrorType;
+    }
+
+    public int getModuleContent() {
+        return moduleContent;
+    }
+
+    public void setModuleContent(int moduleContent) {
+        this.moduleContent = moduleContent;
+    }
+
+    public ObservingProgramConfigs.CalibrationUnit getCalibrationUnit() {
+        return calibrationUnit;
+    }
+
+    public void setCalibrationUnit(ObservingProgramConfigs.CalibrationUnit calibrationUnit) {
+        this.calibrationUnit = calibrationUnit;
+    }
+
+    public ObservingProgramConfigs.LightType getLightType() {
+        return lightType;
+    }
+
+    public void setLightType(ObservingProgramConfigs.LightType lightType) {
+        this.lightType = lightType;
+    }
+
+    public AbstractTelePositionPair[] getTelePositionPair() {
+        return telePositionPair;
+    }
+
+    public void setTelePositionPair(AbstractTelePositionPair[] telePositionPair) {
+        this.telePositionPair = telePositionPair;
+    }
+
+    public ScienceObserver getObserver() {
+        return observer;
+    }
+
+    public void setObserver(ScienceObserver observer) {
+        this.observer = observer;
     }
 }
