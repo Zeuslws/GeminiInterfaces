@@ -86,12 +86,17 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
 
     @Override
     public boolean updateSciencePlanStatus(int planno, AbstractSciencePlan.STATUS stssp) {
-        return false;
+        SciencePlan sp = getSciencePlanByNo(planno);
+        if (sp == null) return false;
+
+        sp.setStatus(stssp);
+        return true;
     }
 
     @Override
     public String testSciencePlan(SciencePlan sciencePlan) {
-        return null;
+        sciencePlan.setStatus(AbstractSciencePlan.STATUS.TESTED);
+        return "Science plan tested successfully.";
     }
 
     @Override
@@ -175,8 +180,12 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
     }
 
     @Override
-    public ObservingProgram validateSciencePlan(AbstractSciencePlan sp, ScienceObserver so) {
-        return null;
+    public SciencePlan validateSciencePlan(AbstractSciencePlan sp, ScienceObserver so) {
+    SciencePlan plan = (SciencePlan) sp;
+
+    plan.setStatus(AbstractSciencePlan.STATUS.VALIDATED);
+
+        return plan;
     }
 
     @Override

@@ -1,32 +1,30 @@
 package edu.gemini;
 
-import java.sql.Date;
+import java.util.Date;  // use util.Date not sql.Date
 
 import edu.gemini.model.AbstractSciencePlan;
 import edu.gemini.model.StarSystem;
 
-
 public class SciencePlan extends AbstractSciencePlan {
-    
-    private int id;                 
-    private String name;           
-    private Astronomer creator;     
-    private double funding;         
-    private String objective;       
-    private Date startDate;         
-    private Date endDate;           
-    private String telescope;       
-    private StarSystem.CONSTELLATIONS target;  
-    private boolean draft;   
+
+    private int id;
+    private String name;
+    private Astronomer creator;
+    private double funding;
+    private String objective;
+    private Date startDate;
+    private Date endDate;
+    private String telescope;
+    private StarSystem.CONSTELLATIONS target;
+    private boolean draft;
     private STATUS status;
-    
 
     // data processing
-    private String fileType;        
-    private String fileQuality;     
-    private String colorType;       
+    private String fileType;
+    private String fileQuality;
+    private String colorType;
     private Float contrast;
-    private Float brightness;      
+    private Float brightness;
     private Float saturation;
     private Float saturationLuminance;
     private Float hue;
@@ -37,6 +35,7 @@ public class SciencePlan extends AbstractSciencePlan {
     private Float luminance;
     private Float exposure;
 
+    // ----- basic fields -----
 
     public int getId() {
         return id;
@@ -110,13 +109,15 @@ public class SciencePlan extends AbstractSciencePlan {
         this.draft = draft;
     }
 
-        public STATUS getStatus() {
+    public STATUS getStatus() {
         return status;
     }
 
     public void setStatus(STATUS status) {
         this.status = status;
     }
+
+    // ----- data processing -----
 
     public String getFileType() {
         return fileType;
@@ -237,5 +238,4 @@ public class SciencePlan extends AbstractSciencePlan {
     public void setName(String name) {
         this.name = name;
     }
- 
 }
