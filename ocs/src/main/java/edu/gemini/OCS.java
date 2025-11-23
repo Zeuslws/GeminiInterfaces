@@ -9,15 +9,22 @@ import java.util.Date;
 
 public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingProgramConfigs,
         AstronomicalData, Astronomer, ScienceObserver> {
-
+   private ArrayList<SciencePlan> sciencePlans = new ArrayList<>();
+    private ArrayList<ObservingProgram> observingPrograms = new ArrayList<>();
+    private int nextPlanId = 1; 
     @Override
     public ArrayList<SciencePlan> getAllSciencePlans() {
-        return null;
+         return sciencePlans;
     }
 
     @Override
     public SciencePlan getSciencePlanByNo(int planNo) {
-        return null;
+       for (SciencePlan sp : sciencePlans) {
+        if (sp.getId() == planNo) {
+            return sp;
+        }
+    }
+    return null;
     }
 
     @Override
