@@ -10,6 +10,9 @@ import java.util.Date;
 public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingProgramConfigs,
         AstronomicalData, Astronomer, ScienceObserver> {
 
+    private ArrayList<SciencePlan> sciencePlans = new ArrayList<>();
+    private int nextPlanId = 1;
+
     @Override
     public ArrayList<SciencePlan> getAllSciencePlans() {
         return null;
@@ -21,13 +24,58 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
     }
 
     @Override
-    public String createSciencePlan(SciencePlan sciencePlan, Astronomer an) {
-        return null;
+public String createSciencePlan(SciencePlan sciencePlan, Astronomer an) {
+
+    sciencePlan.setId(nextPlanId++);
+    sciencePlan.setCreator(an);
+
+    if (sciencePlan.getName() == null || sciencePlan.getName().trim().isEmpty()) {
+        return "Please complete all required fields before saving the science plan.";
     }
+    if (sciencePlan.getObjective() == null || sciencePlan.getObjective().trim().isEmpty()) {
+        return "Please complete all required fields before saving the science plan.";
+    }
+    if (sciencePlan.getStartDate() != null && sciencePlan.getEndDate() != null &&
+        sciencePlan.getStartDate().after(sciencePlan.getEndDate())) {
+        return "Start date cannot be after the end date";
+    }
+    if (sciencePlan.getFunding() <= 0) {
+        return "Funding amount must be a positive numerical value.";
+    }
+
+    for (SciencePlan sp : sciencePlans) {
+        if (sp.getName().equals(sciencePlan.getName())) {
+            return "A science plan with this name already exists. Please use a different plan name.";
+        }
+    }
+
+    sciencePlan.setStatus(AbstractSciencePlan.STATUS.SAVED);
+    sciencePlans.add(sciencePlan);
+
+    return "Create science plan success. ID: " + sciencePlan.getId();
+}
 
     @Override
     public String submitSciencePlan(SciencePlan sciencePlan, Astronomer an) {
-        return null;
+    SciencePlan sp = getSciencePlanByNo(sciencePlan.getId());
+    if (sp == null) {
+        return "Science plan not found.";
+    }
+
+    // can only submit TESTED and complete plans
+    if (sp.getStatus() != AbstractSciencePlan.STATUS.TESTED) {
+        return "This science plan is incomplete. Please complete and test it before submission.";
+    }
+
+    // prevent resubmission
+    if (sp.getStatus() == AbstractSciencePlan.STATUS.SUBMITTED
+            || sp.getStatus() == AbstractSciencePlan.STATUS.VALIDATED
+            || sp.getStatus() == AbstractSciencePlan.STATUS.RUNNING) {
+        return "This science plan has already been submitted or executed.";
+    }
+
+    sp.setStatus(AbstractSciencePlan.STATUS.SUBMITTED);
+        return "Submit science plan success. ID: " + sp.getId();
     }
 
     @Override
