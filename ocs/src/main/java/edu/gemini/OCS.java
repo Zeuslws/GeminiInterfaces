@@ -30,7 +30,7 @@ public class OCS implements GeminiAPI<SciencePlan, ObservingProgram, ObservingPr
     }
 
     @Override
-public String createSciencePlan(SciencePlan sciencePlan, Astronomer an) {
+    public String createSciencePlan(SciencePlan sciencePlan, Astronomer an) {
 
     sciencePlan.setId(nextPlanId++);
     sciencePlan.setCreator(an);
@@ -59,7 +59,7 @@ public String createSciencePlan(SciencePlan sciencePlan, Astronomer an) {
     sciencePlans.add(sciencePlan);
 
     return "Create science plan success. ID: " + sciencePlan.getId();
-}
+    }
 
     @Override
     public String submitSciencePlan(SciencePlan sciencePlan, Astronomer an) {
